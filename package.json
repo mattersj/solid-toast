@@ -1,13 +1,13 @@
 {
-  "name": "solid-toast",
-  "version": "0.5.0",
+  "name": "@mattersj/solid-toast",
+  "version": "0.6.0",
   "description": "Customizable Toast Notifications for SolidJS",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "types": "dist/types/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ardeora/solid-toast.git"
+    "url": "git+https://github.com/mattersj/solid-toast.git"
   },
   "exports": {
     "solid": {
@@ -39,7 +39,7 @@
   "author": "Aryan Deora",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ardeora/solid-toast/issues"
+    "url": "https://github.com/mattersj/solid-toast/issues"
   },
   "sideEffects": false,
   "scripts": {
@@ -47,7 +47,7 @@
     "minify": "terser --compress --mangle --module -- dist/cjs/index.js > dist/cjs/index.min.js",
     "format": "prettier --write src dev"
   },
-  "homepage": "https://github.com/ardeora/solid-toast#readme",
+  "homepage": "https://github.com/mattersj/solid-toast#readme",
   "dependencies": {},
   "peerDependencies": {
     "solid-js": "^1.5.4"
