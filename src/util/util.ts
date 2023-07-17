@@ -1,5 +1,5 @@
-import { setDefaultOpts, defaultOpts, store, dispatch, defaultToasterOptions } from '../core';
-import { ActionType, Toast, ToasterProps, ToastPosition } from '../types';
+import { setDefaultOpts } from '../core';
+import { Toast, ToasterOptions, ToastPosition } from '../types';
 import { JSX } from 'solid-js';
 
 export const generateID = (() => {
@@ -7,7 +7,7 @@ export const generateID = (() => {
   return () => String(++count);
 })();
 
-export const mergeContainerOptions = (props: ToasterProps) => {
+export const mergeContainerOptions = (props: ToasterOptions) => {
   setDefaultOpts((s) => ({
     containerClassName: props.containerClassName ?? s.containerClassName,
     containerStyle: props.containerStyle ?? s.containerStyle,
@@ -38,26 +38,6 @@ export const getToastWrapperStyles = (position: ToastPosition, offset: number): 
     ...verticalStyle,
     ...horizontalStyle,
   };
-};
-
-export const updateToastHeight = (ref: HTMLDivElement, toast: Toast) => {
-  const boundingRect = ref.getBoundingClientRect();
-  if (boundingRect.height !== toast.height) {
-    dispatch({
-      type: ActionType.UPDATE_TOAST,
-      toast: { id: toast.id, height: boundingRect.height },
-    });
-  }
-};
-
-export const getWrapperYAxisOffset = (toast: Toast, position: ToastPosition): number => {
-  const { toasts } = store;
-  const gutter = defaultOpts().gutter || defaultToasterOptions.gutter || 8;
-  const relevantToasts = toasts.filter((t) => (t.position || position) === position && t.height);
-  const toastIndex = relevantToasts.findIndex((t) => t.id === toast.id);
-  const toastsBefore = relevantToasts.filter((toast, i) => i < toastIndex && toast.visible).length;
-  const offset = relevantToasts.slice(0, toastsBefore).reduce((acc, t) => acc + gutter + (t.height || 0), 0);
-  return offset;
 };
 
 export const getToastYDirection = (toast: Toast, defaultPos: ToastPosition) => {

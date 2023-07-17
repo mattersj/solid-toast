@@ -1,3 +1,4 @@
+import { SetStoreFunction } from 'solid-js/store';
 import { Toast } from './';
 
 export enum ActionType {
@@ -43,4 +44,10 @@ export type Action =
 export interface State {
   toasts: Toast[];
   pausedAt: number | undefined;
+}
+
+export interface ToastState {
+  store: State;
+  setStore: SetStoreFunction<State>;
+  dispatch: (action: Action) => void;
 }

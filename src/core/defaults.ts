@@ -1,4 +1,4 @@
-import { ToasterProps, ToastOptions, ToastTimeouts } from '../types';
+import { ToasterOptions, ToastOptions, ToastTimeouts } from '../types';
 import { JSX } from 'solid-js';
 
 export const defaultTimeouts: ToastTimeouts = {
@@ -24,7 +24,7 @@ export const defaultToastOptions: Required<ToastOptions> = {
   iconTheme: {},
 };
 
-export const defaultToasterOptions: ToasterProps = {
+export const defaultToasterOptions: ToasterOptions = {
   position: 'top-right',
   toastOptions: defaultToastOptions,
   gutter: 8,

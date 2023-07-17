@@ -70,7 +70,10 @@ export interface ToasterProps {
   gutter?: number;
   containerStyle?: JSX.CSSProperties;
   containerClassName?: string;
+  children: JSX.Element;
 }
+
+export type ToasterOptions = Omit<ToasterProps, 'children'>;
 
 export interface ToastContainerProps {
   toast: Toast;
@@ -82,3 +85,9 @@ export interface ToastBarProps {
 }
 
 export type IconProps = Partial<IconTheme>;
+
+export interface ToastPromiseMessages<T> {
+  loading: Renderable;
+  success: ValueOrFunction<Renderable, T>;
+  error: ValueOrFunction<Renderable, any>;
+}
