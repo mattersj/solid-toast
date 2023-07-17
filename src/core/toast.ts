@@ -1,4 +1,4 @@
-import { createSignal } from 'solid-js';
+import { createSignal, untrack } from 'solid-js';
 import { ToasterOptions, Message, ToastType, ToastOptions, Toast, ToastHandler, ActionType, ToastState } from '../types';
 import { defaultToasterOptions, defaultToastOptions, defaultTimeouts } from './defaults';
 import { generateID } from '../util';
@@ -29,11 +29,13 @@ function createHandler(state: ToastState, type?: ToastType): ToastHandler {
   });
 
   return (message: Message, options: ToastOptions = {}) => {
-    const existingToast = state.store.toasts.find(({ id }) => id === options.id);
-    const toast = create(message, type, { ...existingToast, ...options });
-    state.dispatch({ type: ActionType.UPSERT_TOAST, toast });
+    return untrack(() => {
+      const existingToast = state.store.toasts.find(({ id }) => id === options.id);
+      const toast = create(message, type, { ...existingToast, ...options });
+      state.dispatch({ type: ActionType.UPSERT_TOAST, toast });
 
-    return toast.id;
+      return toast.id;
+    });
   };
 }
 
