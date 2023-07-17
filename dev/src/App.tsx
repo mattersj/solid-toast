@@ -1,5 +1,5 @@
-import { Component, createEffect, createMemo, createSignal, onCleanup } from 'solid-js';
-import toast, { Toaster } from '../../src';
+import { Component, createEffect, createSignal, onCleanup } from 'solid-js';
+import { Toaster, toast } from '../../src';
 
 const makePromise = (): Promise<string> => {
   return new Promise((resolve, reject) => {
@@ -35,7 +35,7 @@ const App: Component = () => {
   });
   const popTimer = () => toast.custom((t) => {
     const [life, setLife] = createSignal(100)
-    
+
     createEffect(() => {
       if (t.paused) return; 
       const interval = setInterval(() => {
@@ -58,28 +58,29 @@ const App: Component = () => {
   });
 
   const closeAll = () => toast.dismiss();
+
   return (
     <div class="px-6">
-      <Toaster position="top-center" />
-      <h1>Solid Toast Examples</h1>
-      <div
-        style={{
-          display: 'flex',
-          'flex-direction': 'column',
-          'align-items': 'flex-start',
-          gap: '0.5rem',
-        }}
-      >
-        <button class={"blank"}   onClick={popBlank}>Blank Toast</button>
-        <button class={"success"} onClick={popSuccess}>Success Toast</button>
-        <button class={"error"}   onClick={popError}>Error Toast</button>
-        <button class={"loading"} onClick={popLoading}>Loading Toast</button>
-        <button class={"promise"} onClick={popPromise}>Promise Toast</button>
-        <button class={"custom"} onClick={popCustom}>Custom Styles</button>
-        <button class={"timer"}   onClick={popTimer}>Toast Timer</button>
-        <button class={"close"}   onClick={closeAll}>Close all toasts</button>
-        
-      </div>
+      <Toaster position="top-center">
+        <h1>Solid Toast Examples</h1>
+        <div
+          style={{
+            display: 'flex',
+            'flex-direction': 'column',
+            'align-items': 'flex-start',
+            gap: '0.5rem',
+          }}
+        >
+          <button class={"blank"}   onClick={popBlank}>Blank Toast</button>
+          <button class={"success"} onClick={popSuccess}>Success Toast</button>
+          <button class={"error"}   onClick={popError}>Error Toast</button>
+          <button class={"loading"} onClick={popLoading}>Loading Toast</button>
+          <button class={"promise"} onClick={popPromise}>Promise Toast</button>
+          <button class={"custom"}  onClick={popCustom}>Custom Styles</button>
+          <button class={"timer"}   onClick={popTimer}>Toast Timer</button>
+          <button class={"close"}   onClick={closeAll}>Close all toasts</button>
+        </div>
+      </Toaster>
     </div>
   );
 };
